@@ -12,13 +12,15 @@ from joblib import dump, load
 import h5py
 import os
 import numpy as np
-from sklearn.ensemble import RandomForestClassifier
 from pathlib import Path
+from sklearn.ensemble import RandomForestClassifier
+from tiled.client import from_uri
+
 from BMM import user_ns as user_ns_module
 from BMM.user_ns.bmm import BMMuser
 
 user_ns = vars(user_ns_module)
-
+client = from_uri("https://tiled-demo.blueskyproject.io")
 
 class ClassificationAgent:
     def __init__(self):
@@ -102,7 +104,7 @@ class ClassificationAgent:
         return ()
 
 
-class BMMDataEvaluation:
+	class BMMDataEvaluation:
     """A very simple machine learning model for recognizing when an XAS
     scan goes horribly awry.
     """
@@ -163,7 +165,10 @@ class BMMDataEvaluation:
             signal = dtc1 + dtc2 + dtc3 + dtc4
             mu = signal / i0
         else:
-            this = user_ns["db"].v2[uid]
+            # Commenting out the next line for demonstration purposes
+	    #this = user_ns["db"].v2[uid]
+            # ...and adding this next line to read some representative data using Tiled.
+            this = client["bmm"]["raw"][uid]
             if mode is None:
                 mode = this.metadata["start"]["XDI"]["_mode"][0]
             element = this.metadata["start"]["XDI"]["Element"]["symbol"]
