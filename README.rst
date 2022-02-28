@@ -38,7 +38,7 @@ The agent loads and stores the model and/or necessary data, and has at minimum t
 
 Unsupervised learning (Non-negative matrix factorization)
 *********************************************************
-The `NMF companion agent <bnl_ml/unsupervised/agent.py>`_ keeps a constant cache of data to perform the reduction on.
+The `NMF companion agent <bnl_ml_examples/unsupervised/agent.py>`_ keeps a constant cache of data to perform the reduction on.
 We treat these data as *dependent* variables, with *independent* variables coming fom the experiment.
 In the case study presented, the independent variables are temperature measurements, and the dependent variables are the 1-d spectra.
 Each call to ``report`` updates the decomposition using the full dataset, and updates the plots in the visualization.
@@ -79,11 +79,6 @@ where a wrapper agent does pointwise evaluation on UIDs of a document stream, us
 System Requirements
 ===================
 
-
-Hardware Requirements
-*********************
-
-
 Software Requirements
 *********************
 
@@ -97,21 +92,36 @@ This package has been tested exclusively on Linux operating systems.
 
 Python dependencies
 -------------------
-- numpy
-- matplotlib
-- scikit-learn
-- ipython
+The list of required python packages is contained in the `requirements.txt <requirements.txt>`_ file in this repository.  Some of the examples are provided as Jupyter Notebooks.
 
 Getting Started
 ===============
 
-Installation guide
-******************
+Standard Installation with pip
+******************************
 
+Firstly, it is recommended to create a fresh software environment using conda, venv, or similar.  
 
-Install from github::
+with venv...
+::
 
-    $ python3 -m venv pub_env
-    $ source pub_env/bin/activate
+    $ python3 -m venv bnl-ml-examples
+    $ source bnl-ml-examples/bin/activate
+
+or with conda...
+::
+
+    $ conda create -n bnl-ml-examples python pip
+    $ conda activate bnl-ml-examples
+
+Install the requirements from PyPI using pip.
+::
+
     $ python3 -m pip install -r requirements.txt
 
+Get the code and install from this repository::
+
+    $ git clone https://github.com/BNL/pub-ML_examples/
+    $ cd pub-ML_examples
+    $ pip install -e .
+    
